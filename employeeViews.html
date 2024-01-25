@@ -2,19 +2,13 @@
 <html>
   <head>
     <title>Employee List</title>
-    <style>
-      table,
-      th,
-      td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        padding: 5px;
-        text-align: left;
-      }
-    </style>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+
     <script>
       // Function to fetch and display employees
       function fetchAndDisplayEmployees(event) {
@@ -32,12 +26,12 @@
             table.innerHTML = ""; // Clear existing data
             // Create table headers
             let header = table.createTHead();
-            let row = header.insertRow(0);
-            row.insertCell(0).innerHTML = "<b>First Name</b>";
-            row.insertCell(1).innerHTML = "<b>Last Name</b>";
-            row.insertCell(2).innerHTML = "<b>Employee Number</b>";
-            row.insertCell(3).innerHTML = "<b>Salary</b>";
-            row.insertCell(4).innerHTML = "<b>Address</b>";
+            let headerRow = header.insertRow(0);
+            headerRow.insertCell(0).innerHTML = "<b>First Name</b>";
+            headerRow.insertCell(1).innerHTML = "<b>Last Name</b>";
+            headerRow.insertCell(2).innerHTML = "<b>Employee Number</b>";
+            headerRow.insertCell(3).innerHTML = "<b>Salary</b>";
+            headerRow.insertCell(4).innerHTML = "<b>Address</b>";
             // Inserting rows for each employee
             data.forEach((employee) => {
               let row = table.insertRow();
@@ -55,16 +49,27 @@
     </script>
   </head>
   <body>
-    <h1>Employee List</h1>
+    <div class="container mt-4">
+      <h1>Employee List</h1>
 
-    <!-- Add a form to interact with the /employees route -->
-    <form onsubmit="fetchAndDisplayEmployees(event)">
-      <button type="submit">Show Employees</button>
-    </form>
+      <!-- Add a form to interact with the /employees route -->
+      <form onsubmit="fetchAndDisplayEmployees(event)" class="mb-3">
+        <button type="submit" class="btn btn-primary">Show Employees</button>
+      </form>
 
-    <!-- Display the list of employees in a table -->
-    <table id="employeeTable">
-      <!-- Employee data will be displayed here after the form submission -->
-    </table>
+      <!-- Display the list of employees in a table -->
+      <table id="employeeTable" class="table table-bordered">
+        <!-- Employee data will be displayed here after the form submission -->
+      </table>
+    </div>
+
+    <!-- Optional: Bootstrap Bundle with Popper (only if you need Bootstrap's JavaScript components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Popper.js (Required for Bootstrap 4) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap Bundle JavaScript Without Integrity Attribute -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
