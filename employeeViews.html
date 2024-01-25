@@ -2,19 +2,13 @@
 <html>
   <head>
     <title>Employee List</title>
-    <style>
-      table,
-      th,
-      td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        padding: 5px;
-        text-align: left;
-      }
-    </style>
+    <!-- Bootstrap CSS CDN -->
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    crossorigin="anonymous"
+  />
+
     <script>
       // Function to fetch and display employees
       function fetchAndDisplayEmployees(event) {
@@ -66,5 +60,19 @@
     <table id="employeeTable">
       <!-- Employee data will be displayed here after the form submission -->
     </table>
+
+
+
+    <!-- Optional: Bootstrap Bundle with Popper (only if you need Bootstrap's JavaScript components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Popper.js (Required for Bootstrap 4) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap Bundle JavaScript Without Integrity Attribute -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+
   </body>
 </html>
