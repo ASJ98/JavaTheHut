@@ -6,7 +6,7 @@ const dbModule = require('../dbConfig/dbConfig');
 router.get('/employees', (req, res) => {
     dbModule.queryDatabase('SELECT * FROM employee', [])
         .then(results => {
-            res.json(results);
+            res.render('employeeViews', results);
         })
         .catch(err => {
             console.error('Error querying the database: ' + err.message);
