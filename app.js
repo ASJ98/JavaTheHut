@@ -5,6 +5,10 @@ const employeeRoutes = require('./routes/employeeRoutes.js');
 const path = require('path'); // Use require for path
 
 const app = express();
+app.use(express.urlencoded({ extended: true })); // This line is important
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 
 // Initialize the database connection pool

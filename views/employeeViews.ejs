@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee List</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h1>Employee List</h1>
+
+      <!-- Employee Table -->
+      <table class="table table-bordered" id="employeeTable">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Employee Number</th>
+            <th>Salary</th>
+            <th>Address</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(function(employee) { %>
+          <tr>
+            <td><%= employee.employee_first_name %></td>
+            <td><%= employee.employee_last_name %></td>
+            <td><%= employee.employee_number %></td>
+            <td><%= employee.employee_salary %></td>
+            <td><%= employee.employee_address %></td>
+            <td><%= employee.role_name %></td>
+            <td>
+              <form
+                method="post"
+                action="/delete-employee/<%= employee.employee_id %>"
+              >
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <form id="addEmployeeForm" method="post" action="/add-employee">
+        <input type="text" name="firstName" placeholder="First Name" required />
+        <input type="text" name="lastName" placeholder="Last Name" required />
+        <input
+          type="text"
+          name="employeeNumber"
+          placeholder="Employee Number"
+          required
+        />
+        <input
+          type="text"
+          name="employeeSalary"
+          placeholder="Salary"
+          required
+        />
+        <input
+          type="text"
+          name="employeeAddress"
+          placeholder="Address"
+          required
+        />
+        <select name="employeeRoleId" required>
+          <option value="">Select Role</option>
+          <option value="1">Software Developer</option>
+          <option value="2">Data Analyst</option>
+          <option value="3">Machine Learning Engineer</option>
+        </select>
+        <button type="submit" class="btn btn-success">Add Employee</button>
+      </form>
+    </div>
+    <script>
+      document
+        .getElementById("addEmployeeForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(event.target);
+          const data = {};
+          formData.forEach((value, key) => {
+            data[key] = value;
+          });
+
+          fetch("/add-employee", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data); // handle response here
+              // Optionally, refresh the employee list
+              location.reload(); // or use a more sophisticated way to update the table
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Include your JsHandlers.js script here if needed for other functionalities -->
+  </body>
+</html>

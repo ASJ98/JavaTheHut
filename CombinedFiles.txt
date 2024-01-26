@@ -311,6 +311,13 @@ async function fetchAndDisplayEmployees(event) {
             row.insertCell(3).textContent = employee.employee_salary;
             row.insertCell(4).textContent = employee.employee_address;
             row.insertCell(5).textContent = employee.role_name; // Display the role name
+
+            let deleteCell = row.insertCell(6); // Adjust the index as needed
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "btn btn-danger"; // Bootstrap class for styling
+            deleteButton.onclick = function() { deleteEmployee(employee.employee_id); };
+            deleteCell.appendChild(deleteButton);
         });
     } catch (error) {
         console.error("Fetch error:", error);
@@ -346,6 +353,19 @@ async function addEmployee(event) {
         console.error('Error adding employee:', error);
     }
 }
+
+async function deleteEmployee(employeeId) {
+    try {
+        const response = await fetch(`/delete-employee/${employeeId}`, { method: 'DELETE' });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        fetchAndDisplayEmployees(); // Refresh the employee list
+    } catch (error) {
+        console.error('Error deleting employee:', error);
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const showEmployeesForm = document.getElementById('showEmployeesForm');
@@ -461,6 +481,22 @@ router.post('/add-employee', (req, res) => {
             res.status(500).send('Internal Server Error');
         });
 });
+
+router.delete('/delete-employee/:employeeId', (req, res) => {
+    const { employeeId } = req.params;
+
+    const query = `DELETE FROM employee WHERE employee_id = ?`;
+
+    dbModule.queryDatabase(query, [employeeId])
+        .then(result => {
+            res.json({ message: 'Employee deleted' });
+        })
+        .catch(err => {
+            console.error('Error deleting employee:', err);
+            res.status(500).send('Internal Server Error');
+        });
+});
+
 
 
 

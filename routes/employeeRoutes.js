@@ -11,7 +11,7 @@ router.get('/employees', (req, res) => {
 
     dbModule.queryDatabase(query, [])
         .then(results => {
-            res.json(results);
+            res.render('employeeViews', { data: results })
         })
         .catch(err => {
             console.error('Error querying the database: ' + err.message);
@@ -33,9 +33,9 @@ router.post('/add-employee', (req, res) => {
         (employee_first_name, employee_last_name, employee_number, employee_salary, employee_address, employee_role_id) 
         VALUES (?, ?, ?, ?, ?, ?)`;
 
-    dbModule.queryDatabase(query, [firstName, lastName, employeeNumber, employeeSalary, employeeAddress, employeeRoleId])
+        dbModule.queryDatabase(query, [firstName, lastName, employeeNumber, employeeSalary, employeeAddress, employeeRoleId])
         .then(result => {
-            res.status(201).json({ message: 'Employee added', id: result.insertId });
+            res.status(201).json({ message: 'Employee added', id: result.insertId }); // JSON response
         })
         .catch(err => {
             console.error('Error adding employee:', err);
@@ -43,7 +43,7 @@ router.post('/add-employee', (req, res) => {
         });
 });
 
-router.delete('/delete-employee/:employeeId', (req, res) => {
+router.post('/delete-employee/:employeeId', (req, res) => {
     const { employeeId } = req.params;
 
     const query = `DELETE FROM employee WHERE employee_id = ?`;
