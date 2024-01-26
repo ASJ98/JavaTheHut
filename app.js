@@ -5,6 +5,7 @@ const employeeRoutes = require('./routes/employeeRoutes.js');
 const path = require('path'); // Use require for path
 
 const app = express();
+app.use(express.json());
 
 // Initialize the database connection pool
 dbModule.initializeDatabaseConnection();
