@@ -57,26 +57,32 @@
     <div class="kainos-logo-container">
       <img src="kainos_logo.PNG" alt="kainos logo" class="logo">
 
-      <nav>
-        <a href="https://www.kainos.com/"> Home </a>
-        <a href="https://www.kainos.com/about-us">About</a>
-        <a href="https://www.kainos.com/contact-us">Contact us</a>
-      </nav>
+      <!-- <ul>
+        <li><a href="https://www.kainos.com/"> Home </a></li>
+        <li><a href="https://www.kainos.com/about-us">About</a></li>
+        <li><a href="https://www.kainos.com/contact-us">Contact us</a></li>
+      </ul> -->
+
+
+      <div class="topnav">
+          <a class="active" href="https://www.kainos.com/">Home</a>
+          <a href="https://www.kainos.com/contact-us">Contact</a>
+          <a href="https://www.kainos.com/about-us">About</a>
+      </div>
 
     </div>
 
-
-
+    <div class="positionEmployeeData">
     <h1>Employee List</h1>
     <!-- Add a form to interact with the /employees route -->
     <form onsubmit="fetchAndDisplayEmployees(event)">
       <button type="submit">Show Employees</button>
     </form>
-
     <!-- Display the list of employees in a table -->
     <table id="employeeTable">
       <!-- Employee data will be displayed here after the form submission -->
     </table>
+  </div>
 
   </div>
 
