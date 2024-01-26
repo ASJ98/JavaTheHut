@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Employee List</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    crossorigin="anonymous"
+  />
+
+    <script>
+      // Function to fetch and display employees
+      function fetchAndDisplayEmployees(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        fetch("/employees")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const table = document.getElementById("employeeTable");
+            table.innerHTML = ""; // Clear existing data
+            // Create table headers
+            let header = table.createTHead();
+            let row = header.insertRow(0);
+            row.insertCell(0).innerHTML = "<b>First Name</b>";
+            row.insertCell(1).innerHTML = "<b>Last Name</b>";
+            row.insertCell(2).innerHTML = "<b>Employee Number</b>";
+            row.insertCell(3).innerHTML = "<b>Salary</b>";
+            row.insertCell(4).innerHTML = "<b>Address</b>";
+            // Inserting rows for each employee
+            data.forEach((employee) => {
+              let row = table.insertRow();
+              row.insertCell(0).textContent = employee.employee_first_name;
+              row.insertCell(1).textContent = employee.employee_last_name;
+              row.insertCell(2).textContent = employee.employee_number;
+              row.insertCell(3).textContent = employee.employee_salary;
+              row.insertCell(4).textContent = employee.employee_address;
+            });
+          })
+          .catch((error) => {
+            console.error("Fetch error:", error);
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Employee List</h1>
+
+    <!-- Add a form to interact with the /employees route -->
+    <form onsubmit="fetchAndDisplayEmployees(event)">
+      <button type="submit">Show Employees</button>
+    </form>
+
+    <!-- Display the list of employees in a table -->
+    <table id="employeeTable">
+      <!-- Employee data will be displayed here after the form submission -->
+    </table>
+
+
+
+    <!-- Optional: Bootstrap Bundle with Popper (only if you need Bootstrap's JavaScript components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Popper.js (Required for Bootstrap 4) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap Bundle JavaScript Without Integrity Attribute -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+
+  </body>
+</html>
