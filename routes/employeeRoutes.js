@@ -43,7 +43,7 @@ router.post('/add-employee', (req, res) => {
         });
 });
 
-router.post('/delete-employee/:employeeId', (req, res) => {
+router.delete('/delete-employee/:employeeId', (req, res) => {
     const { employeeId } = req.params;
 
     const query = `DELETE FROM employee WHERE employee_id = ?`;

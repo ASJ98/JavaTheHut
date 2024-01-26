@@ -38,7 +38,13 @@
                 method="post"
                 action="/delete-employee/<%= employee.employee_id %>"
               >
-                <button type="submit" class="btn btn-danger">Delete</button>
+                <button
+                  type="button"
+                  class="btn btn-danger delete-btn"
+                  data-employee-id="<%= employee.employee_id %>"
+                >
+                  Delete
+                </button>
               </form>
             </td>
           </tr>
@@ -47,32 +53,59 @@
       </table>
 
       <form id="addEmployeeForm" method="post" action="/add-employee">
-        <input type="text" name="firstName" placeholder="First Name" required />
-        <input type="text" name="lastName" placeholder="Last Name" required />
-        <input
-          type="text"
-          name="employeeNumber"
-          placeholder="Employee Number"
-          required
-        />
-        <input
-          type="text"
-          name="employeeSalary"
-          placeholder="Salary"
-          required
-        />
-        <input
-          type="text"
-          name="employeeAddress"
-          placeholder="Address"
-          required
-        />
-        <select name="employeeRoleId" required>
-          <option value="">Select Role</option>
-          <option value="1">Software Developer</option>
-          <option value="2">Data Analyst</option>
-          <option value="3">Machine Learning Engineer</option>
-        </select>
+        <div class="form-group">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="employeeNumber"
+            placeholder="Employee Number"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="employeeSalary"
+            placeholder="Salary"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            name="employeeAddress"
+            placeholder="Address"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <select name="employeeRoleId" required class="form-control">
+            <option value="">Select Role</option>
+            <option value="1">Software Developer</option>
+            <option value="2">Data Analyst</option>
+            <option value="3">Machine Learning Engineer</option>
+          </select>
+        </div>
         <button type="submit" class="btn btn-success">Add Employee</button>
       </form>
     </div>
@@ -103,6 +136,26 @@
             })
             .catch((error) => console.error("Error:", error));
         });
+
+      // Existing JavaScript for addEmployeeForm...
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const employeeId = this.getAttribute("data-employee-id");
+            fetch(`/delete-employee/${employeeId}`, {
+              method: "DELETE",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data); // handle response here, like removing the row
+                location.reload(); // or a more sophisticated way to update the table
+              })
+              .catch((error) => console.error("Error:", error));
+          });
+        });
+      });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
