@@ -7,13 +7,33 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="../mystyles.css" />
   </head>
-  <body>
-    <div class="container mt-4">
+  <body class="kainosbg">
+    <div class="container mt-4 content">
+      <div class="kainos-logo-container">
+        <img src="kainos_logo.PNG" alt="kainos logo" class="logo" />
+
+        <!-- <ul>
+          <li><a href="https://www.kainos.com/"> Home </a></li>
+          <li><a href="https://www.kainos.com/about-us">About</a></li>
+          <li><a href="https://www.kainos.com/contact-us">Contact us</a></li>
+        </ul> -->
+
+        <div class="topnav">
+            <a class="active" href="https://www.kainos.com/">Home</a>  
+          <a href="https://www.kainos.com/contact-us">Contact</a>  
+          <a href="https://www.kainos.com/about-us">About</a>
+        </div>
+      </div>
       <h1>Employee List</h1>
 
       <!-- Employee Table -->
-      <table class="table table-bordered" id="employeeTable">
+      <table
+        style="color: white"
+        class="table table-bordered"
+        id="employeeTable"
+      >
         <thead>
           <tr>
             <th>First Name</th>
@@ -110,6 +130,7 @@
         <button type="submit" class="btn btn-success">Add Employee</button>
       </form>
     </div>
+
     <script>
       document
         .getElementById("addEmployeeForm")
@@ -164,4 +185,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Include your JsHandlers.js script here if needed for other functionalities -->
   </body>
+  <footer class="workday-logo-container footer">
+    <img src="workday_logo.PNG" alt="workday logo" class="centred-image" />
+  </footer>
 </html>

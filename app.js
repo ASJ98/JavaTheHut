@@ -1,5 +1,9 @@
+require('dotenv').config();
 const express = require('express');
+const dbModule = require('./dbConfig/dbConfig.js');
 const mysql = require('mysql');
+const employeeRoutes = require('./routes/employeeRoutes.js');
+const path = require('path');
 
 const app = express();
 app.use(express.urlencoded({ extended: true })); // This line is important
@@ -15,8 +19,7 @@ dbModule.initializeDatabaseConnection();
 app.use(employeeRoutes);
 
 // app.js
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/jsHandlers', express.static(path.join(__dirname, 'jsHandlers')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 
 // Start the Express server
